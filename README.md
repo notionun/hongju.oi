@@ -1,1 +1,358 @@
-# hongju.oi
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>홍주 — 청보리마을 헤리티지 토마토</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Song+Myung&family=Noto+Serif+KR:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bone:#F3EEE2; --paper:#EAE1CC; --ink:#1C1712; --ink-soft:#4A423A;
+    --brick:#A8402A; --tomato:#E2664A; --olive:#5A6248;
+    --gold:#AD8A55; --gold-light:#E4CDA0; --hair:rgba(28,23,18,0.16);
+    --card-black:#0B0B0D; --card-navy:#10131A; --steel:#33394A;
+    --foil:#CBAD73; --foil-dim:#8C7440; --scrim:rgba(10,9,7,0.78);
+    --void:#08090B; --line:#24262B; --blood:#C81E1E; --blood-dim:#7A1414; --ice:#E4E7EB; --mute:#767C87;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{ background:radial-gradient(ellipse at top, #FAF6EC 0%, var(--bone) 55%), var(--bone); color:var(--ink); font-family:'IBM Plex Sans KR', sans-serif; min-height:100vh; overflow-x:hidden; }
+  .page{ max-width:640px; margin:0 auto; padding:64px 32px 96px; }
+
+  .topbar{ display:flex; justify-content:space-between; align-items:center; padding-bottom:22px; border-bottom:1px solid var(--hair); margin-bottom:48px; }
+  .mark{ font-family:'Song Myung', serif; font-size:20px; color:var(--brick); letter-spacing:2px; }
+  .est{ font-family:'Cormorant Garamond', serif; font-style:italic; font-size:13px; letter-spacing:2px; color:var(--ink-soft); }
+
+  .hero{ display:flex; align-items:center; gap:20px; margin-bottom:6px; }
+  .hero-tomato{ width:58px; height:58px; flex-shrink:0; }
+  .hero-tomato:hover{ animation:wiggle .6s ease; }
+  @keyframes wiggle{ 0%,100%{transform:rotate(0deg);} 25%{transform:rotate(-8deg);} 75%{transform:rotate(8deg);} }
+  .eyebrow{ font-family:'Cormorant Garamond', serif; font-style:italic; font-size:14px; letter-spacing:3px; color:var(--olive); margin-bottom:10px; }
+  h1.name{ font-family:'Song Myung', serif; font-size:clamp(52px, 11vw, 78px); line-height:1; margin:0; color:var(--ink); letter-spacing:2px; }
+  .subtitle{ font-family:'Noto Serif KR', serif; font-size:16px; color:var(--ink-soft); margin:16px 0 44px; }
+  .divider{ height:1px; background:linear-gradient(90deg, var(--gold), transparent 70%); margin:0 0 40px; }
+  .story-lead{ font-family:'Noto Serif KR', serif; font-size:16.5px; line-height:2; color:var(--ink-soft); margin-bottom:52px; }
+  .story-lead b{ color:var(--ink); font-weight:600; }
+
+  .section-label{ display:flex; align-items:center; gap:8px; font-family:'Cormorant Garamond', serif; font-style:italic; font-size:14px; letter-spacing:3px; color:var(--olive); margin-bottom:18px; }
+  .mini-tomato{ width:14px; height:14px; }
+
+  .story-section{ margin-bottom:56px; }
+  .tabs{ display:flex; gap:8px; margin-bottom:22px; flex-wrap:wrap; }
+  .tab-btn{ border:1px solid var(--hair); background:transparent; padding:8px 18px; border-radius:999px; font-family:'Cormorant Garamond', serif; font-style:italic; font-size:13.5px; letter-spacing:1px; color:var(--ink-soft); cursor:pointer; transition:background .3s, color .3s, border-color .3s, transform .2s; }
+  .tab-btn:hover{ transform:translateY(-1px); border-color:var(--tomato); }
+  .tab-btn.active{ background:var(--brick); color:var(--bone); border-color:var(--brick); }
+  .tab-btn:active{ transform:scale(0.96); }
+  .tab-panels{ position:relative; min-height:104px; }
+  .tab-panel{ display:none; font-family:'Noto Serif KR', serif; font-size:15.5px; line-height:1.95; color:var(--ink-soft); }
+  .tab-panel.active{ display:block; animation:fadeUp .5s ease; }
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
+
+  .provenance{ margin-bottom:52px; }
+  .prow{ display:flex; justify-content:space-between; align-items:baseline; padding:15px 0; border-bottom:1px solid var(--hair); }
+  .prow .k{ font-size:13px; letter-spacing:1.5px; color:var(--ink-soft); }
+  .prow .v{ font-family:'Noto Serif KR', serif; font-size:16px; color:var(--ink); text-align:right; }
+
+  blockquote{ margin:0 0 68px; padding-left:24px; border-left:2px solid var(--brick); }
+  blockquote p{ font-family:'Cormorant Garamond', serif; font-style:italic; font-size:24px; line-height:1.5; color:var(--brick); margin:0; }
+
+  .seal-area{ display:flex; justify-content:flex-end; }
+  .seal{ width:52px; height:52px; border-radius:50%; border:1px solid var(--gold); background:transparent; cursor:pointer; display:flex; align-items:center; justify-content:center; font-family:'Song Myung', serif; font-size:17px; color:var(--gold); position:relative; transition:transform .35s, box-shadow .35s, background .35s; }
+  .seal::after{ content:""; position:absolute; inset:-6px; border-radius:50%; border:1px solid var(--gold); opacity:.35; }
+  .seal:hover{ transform:scale(1.06); background:var(--gold); color:var(--bone); box-shadow:0 6px 18px rgba(173,138,85,0.4); }
+  .seal:active{ transform:scale(0.94); }
+  .footer-note{ text-align:right; font-family:'Cormorant Garamond', serif; font-style:italic; font-size:12px; color:var(--ink-soft); margin-top:10px; opacity:.7; }
+
+  /* ---- 명함 오버레이 ---- */
+  .overlay{ position:fixed; inset:0; background:var(--scrim); backdrop-filter:blur(3px); display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity .4s ease; z-index:50; padding:24px; }
+  .overlay.show{ opacity:1; pointer-events:auto; }
+  .close-x{ position:fixed; top:24px; right:28px; width:34px; height:34px; border-radius:50%; border:1px solid rgba(255,255,255,0.25); background:transparent; color:#D8D2C4; font-family:'Cormorant Garamond', serif; font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .25s ease; z-index:51; }
+  .close-x:hover{ background:rgba(255,255,255,0.1); transform:rotate(90deg); }
+
+  .reveal-stage{ width:340px; }
+  .card-outer{ transform:translateY(46px) rotate(-7deg) scale(0.85); opacity:0; transition:transform .5s cubic-bezier(.2,.9,.25,1.15), opacity .4s ease; }
+  .overlay.show .card-outer{ transform:translateY(0) rotate(-2deg) scale(1); opacity:1; }
+
+  .biz-card{ aspect-ratio:1.7/1; background:linear-gradient(155deg, var(--card-navy) 0%, var(--card-black) 100%); border:1px solid #262A34; border-radius:8px; padding:26px 28px; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 40px 80px rgba(0,0,0,0.55); cursor:pointer; transition:transform .3s ease, box-shadow .3s ease; }
+  .biz-card:hover{ transform:translateY(-4px); box-shadow:0 46px 90px rgba(0,0,0,0.6); }
+  .biz-top{ display:flex; justify-content:space-between; font-family:'IBM Plex Mono', monospace; font-size:9px; letter-spacing:2px; color:var(--steel); }
+  .biz-top .redflag{ color:var(--brick); }
+  .biz-mid .hanja{ font-family:'Song Myung', serif; font-size:14px; color:var(--foil-dim); letter-spacing:6px; margin-bottom:4px; }
+  .biz-mid .biz-name{ font-family:'Noto Serif KR', serif; font-weight:900; font-size:30px; letter-spacing:1px; background:linear-gradient(115deg, var(--foil-dim) 0%, var(--foil) 25%, var(--gold-light) 45%, var(--foil) 65%, var(--foil-dim) 100%); background-size:220% 100%; -webkit-background-clip:text; background-clip:text; color:transparent; animation:shine 5s ease-in-out infinite; }
+  @keyframes shine{ 0%,100%{background-position:0% 50%;} 50%{background-position:100% 50%;} }
+  .biz-mid .biz-role{ font-family:'IBM Plex Sans KR', sans-serif; font-size:10.5px; letter-spacing:2.5px; color:#B9BEC9; margin-top:5px; }
+  .biz-bottom{ border-top:1px solid #262A34; padding-top:11px; display:flex; justify-content:space-between; align-items:flex-end; }
+  .biz-bottom .firm{ font-family:'IBM Plex Sans KR', sans-serif; font-size:10px; color:#9098A8; line-height:1.6; }
+  .biz-bottom .firm b{ color:#C7CCD8; font-weight:500; }
+  .biz-bottom .contact{ font-family:'IBM Plex Mono', monospace; font-size:8.5px; color:var(--foil-dim); text-align:right; line-height:1.7; }
+  .tap-hint{ text-align:center; margin-top:16px; font-family:'Cormorant Garamond', serif; font-style:italic; font-size:12.5px; color:#D8D2C4; opacity:.8; }
+
+  /* ===================== 이면 탭 (원형 와이프 리빌) ===================== */
+  .dark-profile{
+    position:fixed; inset:0; z-index:80; overflow-y:auto;
+    background:
+      repeating-linear-gradient(180deg, rgba(255,255,255,0.012) 0 1px, transparent 1px 3px),
+      var(--void);
+    color:var(--ice); font-family:'IBM Plex Sans KR', sans-serif;
+    clip-path:circle(0% at var(--cx,50%) var(--cy,50%));
+    transition:clip-path .65s cubic-bezier(.65,0,.35,1);
+    pointer-events:none;
+  }
+  .dark-profile.open{ clip-path:circle(150% at var(--cx,50%) var(--cy,50%)); pointer-events:auto; }
+
+  .dp-wrap{ max-width:640px; margin:0 auto; padding:40px 32px 100px; }
+  .reveal{ opacity:0; }
+  .dark-profile.open .reveal{ animation:fadeInUp .6s ease forwards; }
+  @keyframes fadeInUp{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);} }
+
+  .topline{ display:flex; justify-content:space-between; align-items:center; font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:2px; color:var(--blood); padding-bottom:14px; border-bottom:1px solid var(--line); margin-bottom:36px; animation-delay:.02s; }
+  .topline .dot{ display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--blood); margin-right:7px; animation:blink 1.6s infinite; }
+  @keyframes blink{ 0%,100%{opacity:1;} 50%{opacity:.25;} }
+  .back-link{ background:none; border:none; color:var(--mute); text-decoration:none; font-family:'IBM Plex Mono', monospace; font-size:10px; cursor:pointer; letter-spacing:1px; }
+  .back-link:hover{ color:var(--ice); }
+
+  .hero-photo{ position:relative; width:100%; height:440px; overflow:hidden; margin-bottom:44px; animation-delay:.08s; background:linear-gradient(160deg,#1a1c20,#08090B); }
+  .hero-photo img{ width:100%; height:100%; object-fit:cover; object-position:center 22%; filter:grayscale(0.9) contrast(1.18) brightness(0.88); display:block; }
+  .hero-photo .metal-edge{ position:absolute; inset:0; border:1px solid rgba(200,205,212,0.25); pointer-events:none; }
+  .hero-photo .scrim{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(8,9,11,0.1) 0%, rgba(8,9,11,0.05) 30%, rgba(8,9,11,0.55) 72%, rgba(8,9,11,0.96) 100%); }
+  .hero-photo .sheen{ position:absolute; inset:0; background:linear-gradient(115deg, transparent 28%, rgba(230,232,236,0.16) 46%, rgba(200,205,212,0.32) 50%, rgba(230,232,236,0.16) 54%, transparent 72%); background-size:250% 250%; mix-blend-mode:overlay; animation:sheenMove 7s ease-in-out infinite; }
+  @keyframes sheenMove{ 0%,100%{ background-position:0% 0%; } 50%{ background-position:100% 100%; } }
+  .hero-photo .tag{ position:absolute; top:18px; left:18px; font-family:'IBM Plex Mono', monospace; font-size:9px; letter-spacing:1.5px; color:var(--blood); border:1px solid var(--blood-dim); padding:3px 8px; background:rgba(8,9,11,0.55); z-index:2; }
+  .hero-photo .ph-label{ position:absolute; inset:0; display:none; align-items:center; justify-content:center; font-family:'IBM Plex Mono', monospace; font-size:9px; letter-spacing:2px; color:var(--mute); text-align:center; padding:10px; z-index:2; }
+  .hero-photo .caption{ position:absolute; left:26px; right:26px; bottom:26px; z-index:2; }
+  .hero-photo .caption .hanja{ font-family:'Noto Serif KR', serif; font-size:13px; color:#C7CCD2; letter-spacing:9px; margin-bottom:8px; }
+  .hero-photo .caption .biz-name{ font-family:'Noto Serif KR', serif; font-weight:900; font-size:clamp(44px,10vw,60px); line-height:1; background:linear-gradient(115deg, #E8EAED 0%, #fff 30%, #9BA0AA 55%, #fff 80%, #C7CCD2 100%); background-size:220% 100%; -webkit-background-clip:text; background-clip:text; color:transparent; text-shadow:0 6px 26px rgba(0,0,0,0.5); animation:silverShine 5s ease-in-out infinite; }
+  @keyframes silverShine{ 0%,100%{ background-position:0% 50%; } 50%{ background-position:100% 50%; } }
+  .hero-photo .caption .role{ font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:2px; color:var(--blood); margin-top:10px; }
+  .hero-photo .caption .underline{ width:52px; height:2px; background:linear-gradient(90deg,#fff,#8a8f99); margin-top:12px; }
+
+  .dp-section-title{ font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:3px; color:var(--mute); margin:44px 0 16px; display:flex; align-items:center; gap:8px; }
+  .dp-section-title::before{ content:""; width:14px; height:1px; background:var(--blood); }
+
+  .dossier{ border:1px solid var(--line); animation-delay:.14s; }
+  .drow{ display:flex; justify-content:space-between; padding:11px 16px; border-bottom:1px solid var(--line); font-family:'IBM Plex Mono', monospace; font-size:12.5px; }
+  .drow:last-child{ border-bottom:none; }
+  .drow span:first-child{ color:var(--mute); letter-spacing:1.5px; }
+  .drow span:last-child{ color:var(--ice); }
+  .drow.flag span:last-child{ color:var(--blood); }
+
+  .case-note{ animation-delay:.20s; border-left:2px solid var(--blood); padding:14px 18px; background:linear-gradient(90deg, rgba(200,30,30,0.06), transparent); }
+  .case-note p{ font-family:'Noto Serif KR', serif; font-size:13.5px; line-height:1.85; color:#D8DCE2; margin:0; }
+
+  .transcript{ animation-delay:.26s; }
+  .line{ display:flex; gap:12px; padding:12px 0; border-bottom:1px solid var(--line); }
+  .line:last-child{ border-bottom:none; }
+  .line .tag2{ font-family:'IBM Plex Mono', monospace; font-size:10px; color:var(--blood); flex-shrink:0; padding-top:2px; }
+  .line .txt{ font-family:'Noto Serif KR', serif; font-size:14.5px; line-height:1.6; color:var(--ice); }
+  .line.hot .txt{ color:#fff; font-weight:600; }
+
+  .traits{ animation-delay:.32s; }
+  .trait{ padding:13px 0; border-bottom:1px solid var(--line); }
+  .trait:last-child{ border-bottom:none; }
+  .trait .tt{ font-family:'Noto Serif KR', serif; font-weight:700; font-size:14px; color:#fff; margin-bottom:4px; }
+  .trait .td{ font-family:'IBM Plex Sans KR', sans-serif; font-size:12px; line-height:1.7; color:var(--mute); }
+
+  .epigraph{ animation-delay:.38s; margin:52px 0 20px; text-align:center; }
+  .epigraph p{ font-family:'Noto Serif KR', serif; font-size:17px; line-height:1.7; color:#fff; font-weight:600; margin:0; }
+  .epigraph .sig{ margin-top:14px; font-family:'IBM Plex Mono', monospace; font-size:9.5px; letter-spacing:2px; color:var(--mute); }
+
+  .stamp{ width:64px; height:64px; border:2px solid var(--blood); border-radius:50%; display:flex; align-items:center; justify-content:center; transform:rotate(-14deg); color:var(--blood); font-family:'IBM Plex Mono', monospace; font-size:8.5px; font-weight:700; text-align:center; line-height:1.3; letter-spacing:.5px; margin:36px auto 0; opacity:.85; }
+
+  @media (max-width:480px){
+    .page{ padding:48px 20px 80px; }
+    .reveal-stage{ width:88vw; }
+    .dp-wrap{ padding:32px 20px 80px; }
+    .hero-photo{ height:320px; }
+  }
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; } }
+</style>
+</head>
+<body>
+
+  <div class="page">
+    <div class="topbar"><span class="mark">洪</span><span class="est">청보리마을 헤리티지</span></div>
+
+    <div class="hero">
+      <svg class="hero-tomato" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+        <defs><radialGradient id="tGrad" cx="35%" cy="30%" r="75%"><stop offset="0%" stop-color="#F0876A"/><stop offset="55%" stop-color="#D9573B"/><stop offset="100%" stop-color="#A8402A"/></radialGradient></defs>
+        <ellipse cx="32" cy="46" rx="17" ry="6" fill="#1C1712" opacity="0.08"/>
+        <path d="M20 24 Q14 18 20 14 Q24 18 24 22 Z" fill="#5A6248"/>
+        <path d="M44 24 Q50 18 44 14 Q40 18 40 22 Z" fill="#5A6248"/>
+        <path d="M32 20 Q28 12 32 8 Q36 12 32 20 Z" fill="#6E7A56"/>
+        <ellipse cx="32" cy="36" rx="22" ry="20" fill="url(#tGrad)"/>
+        <ellipse cx="24" cy="27" rx="6" ry="4" fill="#fff" opacity="0.28"/>
+      </svg>
+      <div><div class="eyebrow">HERITAGE TOMATO · SINGLE ORIGIN</div><h1 class="name">홍주</h1></div>
+    </div>
+
+    <div class="subtitle">청보리마을에서 나고 자란 손, 그 손이 키운 토마토.</div>
+    <div class="divider"></div>
+
+    <p class="story-lead">도시를 떠나 부친의 농장으로 돌아온 지 얼마 되지 않았다. <b>이른 아침의 햇빛과 늦은 오후의 바람</b>을 가장 먼저 아는 사람. 처음 보는 이에게도 먼저 웃으며 인사를 건네고, 수확이 좋은 날이면 콧노래가 절로 난다.</p>
+
+    <div class="story-section">
+      <div class="section-label"><svg class="mini-tomato" viewBox="0 0 64 64"><ellipse cx="32" cy="36" rx="22" ry="20" fill="#A8402A"/><path d="M32 20 Q28 12 32 8 Q36 12 32 20 Z" fill="#5A6248"/></svg>STORY</div>
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="1">01 · 어린 시절</button>
+        <button class="tab-btn" data-tab="2">02 · 도시</button>
+        <button class="tab-btn" data-tab="3">03 · 귀향</button>
+      </div>
+      <div class="tab-panels">
+        <div class="tab-panel active" data-panel="1">청보리마을의 흙바닥 위에서 자랐다. 부친이 평생을 바친 토마토밭을 벗어나고 싶어 했던 날들이 있었다. 가난한 농부의 아들이라는 꼬리표를 떼어내고 싶었던, 그런 시절.</div>
+        <div class="tab-panel" data-panel="2">도시에서 그는 다른 사람이 되었다. 이기기 위해 감정을 지우는 법을 익혔고, 그 훈련은 어느새 그의 전부가 되었다. 그 무렵 그는 무언가를, 버리지 못한 채로 지금까지 지니고 있다.</div>
+        <div class="tab-panel" data-panel="3">부친의 건강을 이유로, 그는 다시 마을로 돌아왔다. 잠시라고 생각했던 시간 속에서, 그는 예상하지 못했던 것을 발견하고 있다 — 계산 밖의 즐거움이라는 것을.</div>
+      </div>
+    </div>
+
+    <div class="section-label"><svg class="mini-tomato" viewBox="0 0 64 64"><ellipse cx="32" cy="36" rx="22" ry="20" fill="#A8402A"/><path d="M32 20 Q28 12 32 8 Q36 12 32 20 Z" fill="#5A6248"/></svg>PROVENANCE</div>
+    <div class="provenance">
+      <div class="prow"><span class="k">나이</span><span class="v">32</span></div>
+      <div class="prow"><span class="k">신장</span><span class="v">192cm</span></div>
+      <div class="prow"><span class="k">재배지</span><span class="v">청보리마을, 토마토</span></div>
+      <div class="prow"><span class="k">특징</span><span class="v">잘 웃고, 잘 챙긴다</span></div>
+    </div>
+
+    <blockquote><p>"우와, 토마토 엄청 잘 익었네요. 하나 드셔보실래요?"</p></blockquote>
+
+    <div class="seal-area"><button class="seal" id="sealBtn" aria-haspopup="dialog" aria-label="비공개 정보 열람">洪</button></div>
+    <div class="footer-note">private access only</div>
+  </div>
+
+  <!-- 명함 오버레이 -->
+  <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="홍주 명함">
+    <button class="close-x" id="closeBtn" aria-label="닫기">×</button>
+    <div class="reveal-stage">
+      <div class="card-outer">
+        <div class="biz-card" id="bizCard" title="눌러서 파일 열람">
+          <div class="biz-top"><span>CONFIDENTIAL</span><span class="redflag">● RESTRICTED</span></div>
+          <div class="biz-mid">
+            <div class="hanja">洪　柱</div>
+            <div class="biz-name">홍주</div>
+            <div class="biz-role">SENIOR PARTNER · 형사 · 민사 전문</div>
+          </div>
+          <div class="biz-bottom">
+            <div class="firm"><b>법무법인 홍주</b><br>서울 강남구 ***로 411, 27F</div>
+            <div class="contact">T. 02-****-****<br>E. hongju@mwolbwa.co.kr</div>
+          </div>
+        </div>
+        <div class="tap-hint">카드를 눌러 파일 열람</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 이면 탭 (같은 페이지 안, 원형 와이프로 리빌) -->
+  <div class="dark-profile" id="darkProfile">
+    <div class="dp-wrap">
+
+      <div class="topline reveal">
+        <span><span class="dot"></span>RESTRICTED ACCESS — LEVEL 3</span>
+        <button class="back-link" id="backBtn">← 농장으로</button>
+      </div>
+
+      <div class="hero-photo reveal">
+        <span class="tag">EXHIBIT A</span>
+        <img id="profileImg" src="https://img.notionusercontent.com/s3/prod-files-secure%2Fda6483cb-960e-8130-af92-0003daedf304%2Fa3fb9177-d0bd-4936-8a2a-3cad107c366b%2F17646.png/size/w=1380?exp=1784553029&sig=-5WWK03Vos055wj2K2y3Y_GAL28lHPTEvtVpVuuwU0Y&imgBuildSrc=presignImageUrl&id=3a0483cb-960e-8013-8092-ce7c100878f1&table=block&mtd=com" alt="홍주" onerror="this.style.display='none'; document.querySelector('.hero-photo .ph-label').style.display='flex';">
+        <div class="scrim"></div>
+        <div class="sheen"></div>
+        <div class="metal-edge"></div>
+        <div class="ph-label">PHOTO<br>PLACEHOLDER<br>이미지 URL을 넣어주세요</div>
+        <div class="caption">
+          <div class="hanja">洪　柱</div>
+          <div class="biz-name">홍주</div>
+          <div class="role">SENIOR PARTNER · 형사 / 강력범죄 전문변호사</div>
+          <div class="underline"></div>
+        </div>
+      </div>
+
+      <div class="dp-section-title reveal">DOSSIER</div>
+      <div class="dossier reveal">
+        <div class="drow"><span>AGE</span><span>32</span></div>
+        <div class="drow"><span>HEIGHT</span><span>192cm</span></div>
+        <div class="drow"><span>FIELD</span><span>형사 / 민사 소송</span></div>
+        <div class="drow"><span>WIN RATE</span><span>98%</span></div>
+        <div class="drow flag"><span>RECENT</span><span>패소 1건 · 회복 중</span></div>
+      </div>
+
+      <div class="dp-section-title reveal">CASE STATUS</div>
+      <div class="case-note reveal">
+        <p>치밀하게 준비했던 소송에서 패소했다. 완벽하게 설계했다고 믿었던 논리가, 처음으로 무너졌다. 회복을 명분 삼아 마을로 내려온 건 — 사실 도피에 가까웠다. 그는 아직 이 사실을 누구에게도 말하지 않았다.</p>
+      </div>
+
+      <div class="dp-section-title reveal">VERBAL CONDUCT</div>
+      <div class="transcript reveal">
+        <div class="line"><span class="tag2">H.</span><span class="txt">감정은 사실관계가 아니지. 증거 가져오시던가.</span></div>
+        <div class="line hot"><span class="tag2">H.</span><span class="txt">시발, 그걸 지금 변론이라고 들고 왔어?</span></div>
+        <div class="line"><span class="tag2">H.</span><span class="txt">그 논리로 재판을 하겠다고? 다시 짜와.</span></div>
+        <div class="line hot"><span class="tag2">H.</span><span class="txt">상대가 불쌍하다는 건 법률상 의미가 존나 1도 없어.</span></div>
+      </div>
+
+      <div class="dp-section-title reveal">TRUE NATURE</div>
+      <div class="traits reveal">
+        <div class="trait"><div class="tt">결과 제일주의</div><div class="td">선악보다 결과를 믿는다. 과정의 정당성보다 승패의 숫자가 먼저다.</div></div>
+        <div class="trait"><div class="tt">공감의 도구화</div><div class="td">타인의 감정을 정확히 읽지만, 판단의 근거로 삼지 않는다. 공감은 설득을 위한 기술일 뿐.</div></div>
+        <div class="trait"><div class="tt">자기기만 경멸</div><div class="td">타인을 속이는 건 전략일 수 있으나, 스스로를 속이는 자는 가장 신뢰하지 않는다.</div></div>
+        <div class="trait"><div class="tt">약속의 무게</div><div class="td">뱉은 말은 곧 책임이다. 한번 한 약속은 반드시 지킨다.</div></div>
+        <div class="trait"><div class="tt">균열 (진행 중)</div><div class="td">패소 이후, 그는 처음으로 스스로의 감정을 완벽하게 통제하지 못하는 순간들과 마주하고 있다.</div></div>
+      </div>
+
+      <div class="epigraph reveal">
+        <p>그는 이기기 위해 태어난 사람처럼 군다.<br>지는 법을, 최근에야 배우고 있다.</p>
+        <div class="sig">이중인격처럼 보이지만, 둘 다 홍주의 진실된 모습이다.</div>
+      </div>
+
+      <div class="stamp reveal">위험<br>인물<br>주의</div>
+
+    </div>
+  </div>
+
+<script>
+  const seal = document.getElementById('sealBtn');
+  const overlay = document.getElementById('overlay');
+  const closeBtn = document.getElementById('closeBtn');
+  const bizCard = document.getElementById('bizCard');
+  const darkProfile = document.getElementById('darkProfile');
+  const backBtn = document.getElementById('backBtn');
+
+  function openOverlay(){ overlay.classList.add('show'); document.addEventListener('keydown', onKeyOverlay); }
+  function closeOverlay(){ overlay.classList.remove('show'); document.removeEventListener('keydown', onKeyOverlay); }
+  function onKeyOverlay(e){ if(e.key === 'Escape') closeOverlay(); }
+
+  seal.addEventListener('click', openOverlay);
+  closeBtn.addEventListener('click', closeOverlay);
+  overlay.addEventListener('click', (e) => { if(e.target === overlay) closeOverlay(); });
+
+  // 명함 클릭 -> 원형 와이프로 같은 페이지 안 이면 탭 촤라락 오픈
+  bizCard.addEventListener('click', (e) => {
+    const r = bizCard.getBoundingClientRect();
+    const cx = ((r.left + r.width / 2) / window.innerWidth) * 100;
+    const cy = ((r.top + r.height / 2) / window.innerHeight) * 100;
+    darkProfile.style.setProperty('--cx', cx + '%');
+    darkProfile.style.setProperty('--cy', cy + '%');
+    darkProfile.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    closeOverlay();
+    document.addEventListener('keydown', onKeyDark);
+  });
+
+  function closeDark(){
+    darkProfile.classList.remove('open');
+    document.body.style.overflow = '';
+    document.removeEventListener('keydown', onKeyDark);
+  }
+  function onKeyDark(e){ if(e.key === 'Escape') closeDark(); }
+  backBtn.addEventListener('click', closeDark);
+
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabPanels = document.querySelectorAll('.tab-panel');
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      tabPanels.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelector('.tab-panel[data-panel="' + btn.dataset.tab + '"]').classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
