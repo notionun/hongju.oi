@@ -1,3 +1,4 @@
+
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -225,7 +226,7 @@
         <div class="biz-card" id="bizCard" title="눌러서 파일 열람">
           <div class="biz-top"><span>CONFIDENTIAL</span><span class="redflag">● RESTRICTED</span></div>
           <div class="biz-mid">
-            <div class="hanja">洪　柱</div>
+            <div class="hanja">洪 柱</div>
             <div class="biz-name">홍주</div>
             <div class="biz-role">SENIOR PARTNER · 형사 · 민사 전문</div>
           </div>
@@ -256,7 +257,7 @@
         <div class="metal-edge"></div>
         <div class="ph-label">PHOTO<br>PLACEHOLDER<br>이미지 URL을 넣어주세요</div>
         <div class="caption">
-          <div class="hanja">洪　柱</div>
+          <div class="hanja">洪 柱</div>
           <div class="biz-name">홍주</div>
           <div class="role">SENIOR PARTNER · 형사 / 강력범죄 전문변호사</div>
           <div class="underline"></div>
