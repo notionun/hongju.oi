@@ -250,7 +250,7 @@
 
       <div class="hero-photo reveal">
         <span class="tag">EXHIBIT A</span>
-        <img id="profileImg" src="https://img.notionusercontent.com/s3/prod-files-secure%2Fda6483cb-960e-8130-af92-0003daedf304%2Fa3fb9177-d0bd-4936-8a2a-3cad107c366b%2F17646.png/size/w=1380?exp=1784553029&sig=-5WWK03Vos055wj2K2y3Y_GAL28lHPTEvtVpVuuwU0Y&imgBuildSrc=presignImageUrl&id=3a0483cb-960e-8013-8092-ce7c100878f1&table=block&mtd=com" alt="홍주" onerror="this.style.display='none'; document.querySelector('.hero-photo .ph-label').style.display='flex';">
+        <img id="profileImg" src="https://raw.githubusercontent.com/notionun/obj/refs/heads/main/HONG.png" alt="홍주" onerror="this.style.display='none'; document.querySelector('.hero-photo .ph-label').style.display='flex';">
         <div class="scrim"></div>
         <div class="sheen"></div>
         <div class="metal-edge"></div>
